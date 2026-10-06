@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 selection:bg-brand-500 selection:text-white;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Glass Panels & Cards with Ultra Modern Aesthetics */
+.glass-panel {
+  @apply bg-white/90 border border-slate-200/90 shadow-md shadow-slate-200/40 backdrop-blur-md dark:bg-slate-900/80 dark:border-slate-800/80 dark:shadow-2xl dark:shadow-slate-950/50;
+}
+
+.glass-card {
+  @apply bg-white border border-slate-200/90 shadow-xs hover:shadow-lg hover:-translate-y-0.5 hover:border-brand-500/40 backdrop-blur-sm transition-all duration-300 dark:bg-slate-900/80 dark:border-slate-800/80 dark:hover:border-brand-500/40 dark:hover:shadow-brand-500/5;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-brand-600 via-indigo-500 to-cyan-500 dark:from-brand-400 dark:via-indigo-300 dark:to-cyan-400 bg-clip-text text-transparent;
+}
+
+.gradient-border {
+  @apply relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-r before:from-brand-500 before:to-indigo-500 before:rounded-3xl before:-z-10;
+}
+
+.card-interactive {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-500/50 cursor-pointer;
+}
+
+.badge-glow {
+  @apply shadow-[0_0_12px_rgba(12,140,233,0.25)] border border-brand-500/40;
+}

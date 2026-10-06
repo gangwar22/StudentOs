@@ -1,0 +1,40 @@
+import mongoose from 'mongoose';
+
+const UserSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+  password: { type: String, required: true, select: false },
+  emailVerified: { type: Boolean, default: false, index: true },
+  emailVerificationCodeHash: { type: String, select: false },
+  emailVerificationExpiresAt: { type: Date, select: false },
+  emailVerificationLastSentAt: { type: Date, select: false },
+  emailVerificationAttempts: { type: Number, default: 0, select: false },
+  accessLevel: { type: String, enum: ['student', 'admin', 'super_admin'], default: 'student', index: true },
+  adminRequestStatus: { type: String, enum: ['none', 'pending', 'approved', 'rejected'], default: 'none', index: true },
+  adminRequestReason: { type: String, default: '' },
+  adminRequestedAt: { type: Date, default: null },
+  adminReviewedAt: { type: Date, default: null },
+  adminReviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+  name: { type: String },
+  targetRole: { type: String, default: 'Full Stack Developer' },
+  profile: { type: mongoose.Schema.Types.Mixed },
+  completedPhaseNumbers: [{ type: Number }],
+  completedLessonIds: [{ type: String }],
+  phaseStartDates: { type: mongoose.Schema.Types.Mixed, default: {} },
+  phaseCompletionDates: { type: mongoose.Schema.Types.Mixed, default: {} },
+  phaseDaysSpent: { type: mongoose.Schema.Types.Mixed, default: {} },
+  assessmentAttempts: [{ type: mongoose.Schema.Types.Mixed }],
+  dailyGoals: [{ type: mongoose.Schema.Types.Mixed }],
+  weeklyGoals: [{ type: mongoose.Schema.Types.Mixed }],
+  monthlyGoals: [{ type: mongoose.Schema.Types.Mixed }],
+  submittedMiniProjects: { type: mongoose.Schema.Types.Mixed, default: {} },
+  reflectionLogs: [{ type: mongoose.Schema.Types.Mixed }],
+  aiMentorHistory: [{ type: mongoose.Schema.Types.Mixed }],
+  generatedQuizzes: [{ type: mongoose.Schema.Types.Mixed }],
+  solvedProblemIds: [{ type: String }],
+  totalXP: { type: Number, default: 0 },
+  activityLogs: [{ type: mongoose.Schema.Types.Mixed }],
+  askedQuestionIds: [{ type: String }],
+  practiceDailyState: { type: mongoose.Schema.Types.Mixed, default: null }
+}, { timestamps: true });
+
+export const User = mongoose.models.User || mongoose.model('User', UserSchema);
